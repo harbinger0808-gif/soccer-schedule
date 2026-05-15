@@ -28,7 +28,7 @@ export default function ScheduleClient() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`/api/matches?teams=${teamParam}`);
+      const res = await fetch(`/api/matches?teams=${teamParam}${isTest ? "&test=1" : ""}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setMatches(data.matches ?? []);
