@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
     matches.unshift({
       id: 99999,
       utcDate: soon,
+      status: "SCHEDULED",
       stage: "GROUP_STAGE",
       group: "GROUP_A",
       venue: "テストスタジアム（通知テスト用）",
