@@ -1,6 +1,5 @@
 "use client";
 
-// 観戦のお供おすすめ
 const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? "syunchan0529-22";
 
 function amazonUrl(asin: string) {
@@ -13,6 +12,76 @@ function amazonSearch(q: string) {
 
 const ITEMS = [
   {
+    category: "🪑 観戦グッズ",
+    items: [
+      {
+        label: "ビーズソファ Yogibo Max",
+        desc: "沈み込む快感。長時間観戦の最強アイテム",
+        url: amazonSearch("ビーズソファ Yogibo Max"),
+      },
+      {
+        label: "座椅子 リクライニング",
+        desc: "床に座って大画面観戦。腰が楽になる",
+        url: amazonSearch("座椅子 リクライニング コンパクト"),
+      },
+      {
+        label: "低反発クッション",
+        desc: "ソファや床に置くだけで快適さが激変",
+        url: amazonSearch("低反発クッション 座布団 大きめ"),
+      },
+      {
+        label: "ひざ掛け ブランケット",
+        desc: "夜の冷え対策。冷房が強い部屋にも",
+        url: amazonSearch("ひざ掛け ブランケット 大判 フランネル"),
+      },
+      {
+        label: "サイドテーブル ソファ用",
+        desc: "飲み物・スナックをすぐ手が届く場所に",
+        url: amazonSearch("サイドテーブル ソファ ベッド 飲み物"),
+      },
+      {
+        label: "スマホスタンド 卓上",
+        desc: "サブ画面で速報チェックしながら観戦",
+        url: amazonSearch("スマホスタンド 卓上 角度調整"),
+      },
+    ],
+  },
+  {
+    category: "🌙 深夜対策",
+    items: [
+      {
+        label: "モンスターエナジー 355ml×24缶",
+        desc: "深夜キックオフに向けてチャージ",
+        url: amazonUrl("B07BNTG2QG"),
+      },
+      {
+        label: "レッドブル 250ml×24缶",
+        desc: "眠気に打ち勝つ定番エナジードリンク",
+        url: amazonUrl("B003PXBF98"),
+      },
+      {
+        label: "眠眠打破 50ml×60本",
+        desc: "試合前に一本。確実に目が覚める",
+        url: amazonSearch("眠眠打破 まとめ買い"),
+      },
+      {
+        label: "アイマスク 安眠 遮光",
+        desc: "試合前にちょっと仮眠して万全の状態で",
+        url: amazonSearch("アイマスク 安眠 遮光 立体"),
+      },
+      {
+        label: "耳栓 防音 睡眠用",
+        desc: "家族が寝てる中でも音を気にせず観戦",
+        url: amazonSearch("耳栓 防音 睡眠 フォーム"),
+      },
+      {
+        label: "カフェイン サプリ",
+        desc: "コーヒーが苦手な人の深夜観戦サポート",
+        url: amazonSearch("カフェイン サプリ 眠気覚まし"),
+      },
+    ],
+  },
+  {
     category: "🍺 飲み物",
     items: [
       {
@@ -21,19 +90,64 @@ const ITEMS = [
         url: amazonUrl("B07BQJG7BT"),
       },
       {
-        label: "コカ・コーラ 500ml×24本",
-        desc: "ノンアルでも盛り上がれる",
-        url: amazonUrl("B01N7VKNI4"),
-      },
-      {
         label: "アサヒスーパードライ 350ml×24缶",
         desc: "キレのある味わいで試合を楽しむ",
         url: amazonUrl("B07BPD6QJ7"),
       },
       {
+        label: "コカ・コーラ 500ml×24本",
+        desc: "ノンアルでも盛り上がれる定番",
+        url: amazonUrl("B01N7VKNI4"),
+      },
+      {
+        label: "三ツ矢サイダー 500ml×24本",
+        desc: "さっぱり爽快。子供から大人まで",
+        url: amazonSearch("三ツ矢サイダー 500ml 24本"),
+      },
+      {
+        label: "綾鷹 緑茶 500ml×24本",
+        desc: "試合中の水分補給はやっぱりお茶",
+        url: amazonSearch("綾鷹 緑茶 500ml 24本"),
+      },
+      {
         label: "ポカリスエット 500ml×24本",
-        desc: "深夜観戦の水分補給に",
+        desc: "深夜観戦で意外と汗かく。スポーツドリンクで補給",
         url: amazonUrl("B001V9QLIY"),
+      },
+    ],
+  },
+  {
+    category: "🍿 お菓子・スナック",
+    items: [
+      {
+        label: "カルビー ポテトチップス 詰め合わせ",
+        desc: "止まらない。観戦のお供の王様",
+        url: amazonSearch("カルビー ポテトチップス 詰め合わせ 大袋"),
+      },
+      {
+        label: "亀田の柿の種 10袋詰め",
+        desc: "ピリ辛でビールが進む定番おつまみ",
+        url: amazonUrl("B07CWS3RNR"),
+      },
+      {
+        label: "じゃがりこ まとめ買い",
+        desc: "食べやすくて手が汚れない観戦向きスナック",
+        url: amazonSearch("じゃがりこ まとめ買い 大量"),
+      },
+      {
+        label: "ミックスナッツ 大袋",
+        desc: "ビールに合う。ちょっとヘルシーなおつまみ",
+        url: amazonSearch("ミックスナッツ 大袋 1kg 素焼き"),
+      },
+      {
+        label: "グミ 詰め合わせ",
+        desc: "眠気覚ましにも。噛んで集中力キープ",
+        url: amazonSearch("グミ 詰め合わせ まとめ買い 大量"),
+      },
+      {
+        label: "チョコレート 詰め合わせ",
+        desc: "深夜の糖分補給。幸福感で応援に力が入る",
+        url: amazonSearch("チョコレート 詰め合わせ まとめ買い"),
       },
     ],
   },
@@ -51,89 +165,14 @@ const ITEMS = [
         url: amazonUrl("B08LG2X98F"),
       },
       {
-        label: "Bluetoothイヤホン ワイヤレス",
-        desc: "深夜観戦で周りを起こさない",
-        url: amazonSearch("Bluetooth イヤホン ワイヤレス 高音質"),
-      },
-      {
-        label: "プロジェクター 小型 家庭用",
+        label: "小型プロジェクター 家庭用",
         desc: "壁に大画面で迫力満点の観戦",
-        url: amazonSearch("小型プロジェクター 家庭用 4K"),
-      },
-    ],
-  },
-  {
-    category: "⚽ サッカーグッズ",
-    items: [
-      {
-        label: "日本代表 ユニフォーム 2026",
-        desc: "着て観戦すると気分が上がる",
-        url: amazonSearch("日本代表 ユニフォーム 2026"),
+        url: amazonSearch("小型プロジェクター 家庭用 4K WiFi"),
       },
       {
-        label: "サッカーボール 5号",
-        desc: "観戦後に子供と蹴る",
-        url: amazonSearch("サッカーボール 5号 公式"),
-      },
-      {
-        label: "サポーターグッズ 日本代表",
-        desc: "フラッグ・タオルで応援を盛り上げる",
-        url: amazonSearch("日本代表 サポーター グッズ タオル"),
-      },
-      {
-        label: "クラッカー・メガホン",
-        desc: "仲間と観戦するときに盛り上がる",
-        url: amazonSearch("メガホン 応援 サッカー"),
-      },
-    ],
-  },
-  {
-    category: "📚 W杯をもっと楽しむ本",
-    items: [
-      {
-        label: "サッカー戦術の教科書",
-        desc: "フォーメーションが分かると試合が10倍面白い",
-        url: amazonSearch("サッカー 戦術 本 入門"),
-      },
-      {
-        label: "ワールドカップ全大会の記録",
-        desc: "歴代の名勝負・名場面を振り返る",
-        url: amazonSearch("ワールドカップ 歴史 本"),
-      },
-      {
-        label: "日本代表 名勝負・秘話",
-        desc: "日本サッカーの軌跡を知る一冊",
-        url: amazonSearch("日本代表 サッカー 本 名勝負"),
-      },
-      {
-        label: "世界のサッカースター名鑑2026",
-        desc: "出場選手を予習してW杯を楽しもう",
-        url: amazonSearch("サッカー スター 名鑑 2026"),
-      },
-    ],
-  },
-  {
-    category: "🍕 観戦フード",
-    items: [
-      {
-        label: "カルビー ポテトチップス 大袋 詰め合わせ",
-        desc: "観戦のお供に欠かせない定番スナック",
-        url: amazonSearch("ポテトチップス 詰め合わせ 大袋"),
-      },
-      {
-        label: "柿の種 大袋",
-        desc: "おつまみにも。止まらない美味しさ",
-        url: amazonUrl("B07CWS3RNR"),
-      },
-      {
-        label: "冷凍ピザ まとめ買い",
-        desc: "深夜観戦の腹ごしらえに",
-        url: amazonSearch("冷凍ピザ まとめ買い"),
-      },
-      {
-        label: "唐揚げ 冷凍食品",
-        desc: "レンチンで本格おつまみ",
-        url: amazonSearch("唐揚げ 冷凍 レンジ"),
+        label: "ワイヤレスイヤホン",
+        desc: "深夜観戦で家族を起こさない",
+        url: amazonSearch("ワイヤレスイヤホン Bluetooth 高音質"),
       },
     ],
   },
@@ -152,7 +191,7 @@ const ITEMS = [
       },
       {
         label: "NHKプラス",
-        desc: "NHK放送試合をスマホで視聴",
+        desc: "NHK放送試合をスマホ・PCで無料視聴",
         url: "https://plus.nhk.jp/",
       },
       {
@@ -175,7 +214,6 @@ export default function ViewingGuide() {
         {ITEMS.map((section) => (
           <div key={section.category}>
             <div className="text-xs text-white/40 mb-2 font-medium">{section.category}</div>
-            {/* 横スクロールカルーセル */}
             <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
               {section.items.map((item) => (
                 <a
