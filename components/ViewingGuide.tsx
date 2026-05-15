@@ -27,23 +27,6 @@ const ITEMS = [
     ],
   },
   {
-    category: "🍟 つまみ・フード",
-    items: [
-      {
-        label: "出前館",
-        desc: "試合直前に注文。ピザ・寿司・ファストフード",
-        url: "https://order.demae-can.com/",
-        badge: "提携",
-      },
-      {
-        label: "Uber Eats",
-        desc: "キックオフに合わせてデリバリー",
-        url: "https://www.ubereats.com/jp",
-        badge: "提携",
-      },
-    ],
-  },
-  {
     category: "📺 視聴環境",
     items: [
       {
