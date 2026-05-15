@@ -42,8 +42,8 @@ export async function POST(request: NextRequest) {
       stage: "GROUP_STAGE",
       group: "GROUP_A",
       venue: "テストスタジアム（通知テスト用）",
-      homeTeam: { id: 766, name: "Japan", shortName: "日本", crest: "" },
-      awayTeam: { id: 8, name: "Germany", shortName: "ドイツ", crest: "" },
+      homeTeam: { id: 766, name: "Japan", shortName: "日本", tla: "JPN", crest: "" },
+      awayTeam: { id: 8, name: "Germany", shortName: "ドイツ", tla: "GER", crest: "" },
       score: { winner: null, fullTime: { home: null, away: null } },
     });
   }
