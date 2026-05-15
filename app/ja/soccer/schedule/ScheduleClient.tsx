@@ -15,6 +15,7 @@ export default function ScheduleClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const teamParam = searchParams.get("teams") ?? String(JAPAN_ID);
+  const isTest = searchParams.get("test") === "1";
   const teamIds = teamParam.split(",").map(Number);
 
   const [matches, setMatches] = useState<Match[]>([]);
@@ -75,7 +76,7 @@ export default function ScheduleClient() {
 
         {/* カレンダー一括追加 */}
         <div className="space-y-2 mb-6">
-          <GoogleCalendarButton teamsParam={teamParam} matchCount={matches.length} />
+          <GoogleCalendarButton teamsParam={teamParam} matchCount={matches.length} isTest={isTest} />
           <a
             href={`/api/calendar?teams=${teamParam}`}
             download="worldcup2026.ics"

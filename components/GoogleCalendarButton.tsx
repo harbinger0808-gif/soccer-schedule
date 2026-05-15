@@ -6,9 +6,10 @@ import { useState } from "react";
 interface Props {
   teamsParam: string;
   matchCount: number;
+  isTest?: boolean;
 }
 
-export default function GoogleCalendarButton({ teamsParam, matchCount }: Props) {
+export default function GoogleCalendarButton({ teamsParam, matchCount, isTest }: Props) {
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ succeeded: number; total: number } | null>(null);
@@ -25,7 +26,7 @@ export default function GoogleCalendarButton({ teamsParam, matchCount }: Props) 
       const res = await fetch("/api/calendar/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ teamsParam }),
+        body: JSON.stringify({ teamsParam, isTest: isTest ?? false }),
       });
       const data = await res.json();
       setResult(data);

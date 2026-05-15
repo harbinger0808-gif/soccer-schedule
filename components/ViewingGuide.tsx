@@ -2,7 +2,7 @@
 
 // 観戦のお供おすすめ
 // リンクURLは .env.local の NEXT_PUBLIC_AMAZON_TAG でアソシエイトタグを差し替える
-const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? "harbinger-22";
+const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? "syunchan0529-22";
 
 function amazonUrl(asin: string) {
   return `https://www.amazon.co.jp/dp/${asin}?tag=${AMAZON_TAG}`;

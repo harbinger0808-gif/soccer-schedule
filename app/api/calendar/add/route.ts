@@ -28,10 +28,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "未ログイン" }, { status: 401 });
   }
 
-  const { teamsParam } = await request.json();
+  const { teamsParam, isTest } = await request.json();
   const teamIds = (teamsParam ?? "766").split(",").filter(Boolean);
 
   const matches = await getMatchesByTeams(teamIds);
+
+  // テストモード：30分後のダミー試合を先頭に追加
+  if (isTest) {
+    const soon = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+    matches.unshift({
+      id: 99999,
+      utcDate: soon,
+      stage: "GROUP_STAGE",
+      group: "GROUP_A",
+      venue: "テストスタジアム（通知テスト用）",
+      homeTeam: { id: 766, name: "Japan", shortName: "日本", crest: "" },
+      awayTeam: { id: 8, name: "Germany", shortName: "ドイツ", crest: "" },
+      score: { winner: null, fullTime: { home: null, away: null } },
+    });
+  }
 
   const auth = new google.auth.OAuth2();
   auth.setCredentials({ access_token: token.accessToken as string });
