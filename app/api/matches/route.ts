@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getMatchesByTeams, getKnockoutTBDMatches, Match } from "@/lib/football";
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 const byDate = (a: { utcDate: string }, b: { utcDate: string }) =>
   new Date(a.utcDate).getTime() - new Date(b.utcDate).getTime();
