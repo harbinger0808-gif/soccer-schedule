@@ -51,9 +51,25 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const teamsParam = searchParams.get("teams") ?? "311";
   const teamIds = teamsParam.split(",").filter(Boolean);
+  const isTest = searchParams.get("test") === "1";
 
   try {
     const matches = await getMatchesByTeams(teamIds);
+
+    if (isTest) {
+      const soon = new Date(Date.now() + 45 * 60 * 1000).toISOString();
+      matches.unshift({
+        id: 99999,
+        utcDate: soon,
+        status: "SCHEDULED",
+        stage: "GROUP_STAGE",
+        group: "GROUP_A",
+        venue: "テストスタジアム（通知テスト用）",
+        homeTeam: { id: 766, name: "Japan", shortName: "日本", tla: "JPN", crest: "" },
+        awayTeam: { id: 8, name: "Germany", shortName: "ドイツ", tla: "GER", crest: "" },
+        score: { winner: null, fullTime: { home: null, away: null } },
+      });
+    }
     const sorted = matches.sort(
       (a, b) => new Date(a.utcDate).getTime() - new Date(b.utcDate).getTime()
     );
