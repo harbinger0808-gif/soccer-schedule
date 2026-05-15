@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
   // テストモード：30分後のダミー試合を先頭に追加
   if (isTest) {
-    const soon = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+    const soon = new Date(Date.now() + 45 * 60 * 1000).toISOString();
     matches.unshift({
       id: 99999,
       utcDate: soon,

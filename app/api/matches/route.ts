@@ -8,7 +8,7 @@ const byDate = (a: { utcDate: string }, b: { utcDate: string }) =>
 
 // テスト用ダミー試合（30分後）
 function getTestMatch(): Match {
-  const soon = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+  const soon = new Date(Date.now() + 45 * 60 * 1000).toISOString();
   return {
     id: 99999,
     utcDate: soon,
