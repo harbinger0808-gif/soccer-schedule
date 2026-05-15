@@ -18,3 +18,12 @@ body {
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
+
+/* スクロールバーを非表示 */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
