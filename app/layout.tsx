@@ -6,15 +6,49 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
+const BASE_URL = "https://japan-wc2026.com";
+
 export const metadata: Metadata = {
-  title: "W杯2026 日程＆カレンダー | Soccer Schedule",
-  description: "W杯2026の全試合を日本時間で確認。Googleカレンダーに1クリックで全試合を登録。DAZN・NHK・ABEMAの放送情報も掲載。",
-  keywords: ["W杯2026", "サッカー", "日程", "カレンダー", "日本代表"],
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "W杯2026 日程＆カレンダー | ワールドカップ日本時間",
+    template: "%s | W杯2026 日程",
+  },
+  description: "ワールドカップ2026の全試合日程を日本時間で確認。Googleカレンダーに1クリックで全試合を一括登録。日本代表・グループ順位表・DAZN・NHK・ABEMA放送情報も掲載。",
+  keywords: ["W杯2026", "ワールドカップ2026", "サッカー日程", "日本代表", "カレンダー登録", "グループ順位表", "DAZN", "ABEMA", "NHK", "FIFA World Cup 2026"],
+  authors: [{ name: "japan-wc2026.com" }],
+  alternates: {
+    canonical: BASE_URL,
+  },
   openGraph: {
-    title: "W杯2026 日程＆カレンダー",
-    description: "全64試合を日本時間で表示。Googleカレンダーに1クリック登録。",
+    title: "⚽ W杯2026 日程＆カレンダー | 日本時間で全試合確認",
+    description: "ワールドカップ2026の全試合を日本時間で表示。Googleカレンダーに1クリックで一括登録できる！日本代表の試合日程・グループ順位表も確認できます。",
+    url: BASE_URL,
+    siteName: "W杯2026 日程＆カレンダー",
     locale: "ja_JP",
     type: "website",
+    images: [
+      {
+        url: `${BASE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "W杯2026 日程＆カレンダー",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "⚽ W杯2026 日程＆カレンダー",
+    description: "日本代表の試合日程をGoogleカレンダーに1クリック登録！グループ順位表も確認できます。",
+    images: [`${BASE_URL}/og-image.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
