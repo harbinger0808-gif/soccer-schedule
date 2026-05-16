@@ -1,7 +1,8 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import AdModal from "@/components/AdModal";
 
 interface Props {
   teamsParam: string;
@@ -13,13 +14,10 @@ export default function GoogleCalendarButton({ teamsParam, matchCount, isTest }:
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ succeeded: number; total: number } | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [pendingApiCall, setPendingApiCall] = useState<Promise<void> | null>(null);
 
-  async function handleAdd() {
-    if (!session) {
-      signIn("google");
-      return;
-    }
-
+  const executeApiCall = useCallback(async () => {
     setLoading(true);
     setResult(null);
     try {
@@ -35,11 +33,34 @@ export default function GoogleCalendarButton({ teamsParam, matchCount, isTest }:
     } finally {
       setLoading(false);
     }
+  }, [teamsParam, isTest]);
+
+  function handleAdd() {
+    if (!session) {
+      signIn("google");
+      return;
+    }
+
+    // モーダルを開き、APIコールを並行で開始
+    setModalOpen(true);
+    const promise = executeApiCall();
+    setPendingApiCall(promise);
   }
+
+  const handleModalComplete = useCallback(async () => {
+    setModalOpen(false);
+    // APIコールがまだ終わっていない場合は待機
+    if (pendingApiCall) {
+      await pendingApiCall;
+      setPendingApiCall(null);
+    }
+  }, [pendingApiCall]);
 
   if (status === "loading") return null;
 
   return (
+    <>
+      <AdModal open={modalOpen} onComplete={handleModalComplete} />
     <div className="space-y-2">
       {!session ? (
         <button
@@ -53,7 +74,7 @@ export default function GoogleCalendarButton({ teamsParam, matchCount, isTest }:
         <div className="space-y-2">
           <button
             onClick={handleAdd}
-            disabled={loading}
+            disabled={loading || modalOpen}
             className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold py-3 px-4 rounded-xl transition-colors text-sm flex items-center justify-center gap-2"
           >
             {loading ? (
@@ -84,6 +105,7 @@ export default function GoogleCalendarButton({ teamsParam, matchCount, isTest }:
         </div>
       )}
     </div>
+    </>
   );
 }
 

@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { StandingGroup, StandingEntry, WC_TEAMS } from "@/lib/football";
 
+const DAZN_URL =
+  process.env.NEXT_PUBLIC_DAZN_AFFILIATE_URL ?? "https://www.dazn.com/ja-JP/welcome";
+
 const teamFlagMap = new Map(WC_TEAMS.map((t) => [t.id, t.flag]));
 
 interface Props {
@@ -113,6 +116,20 @@ export default function Standings({ standings, selectedTeamIds }: Props) {
           );
         })}
       </div>
+
+      {/* DAZNバナー */}
+      <a
+        href={DAZN_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 flex items-center justify-between px-4 py-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 hover:bg-yellow-500/15 transition-colors"
+      >
+        <div>
+          <div className="text-sm font-bold text-yellow-300">📺 W杯全試合 DAZNでライブ配信</div>
+          <div className="text-xs text-yellow-300/60 mt-0.5">月額4,200円〜 · 初月無料キャンペーンあり</div>
+        </div>
+        <span className="text-yellow-300 text-sm">▶ 見る →</span>
+      </a>
     </div>
   );
 }

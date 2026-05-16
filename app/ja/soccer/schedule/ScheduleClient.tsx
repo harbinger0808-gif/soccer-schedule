@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Fragment } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Match, StandingGroup, WC_TEAMS, JAPAN_TEAM_ID } from "@/lib/football";
 import MatchCard from "@/components/MatchCard";
@@ -9,6 +9,7 @@ import GoogleCalendarButton from "@/components/GoogleCalendarButton";
 import Standings from "@/components/Standings";
 import ViewingGuide from "@/components/ViewingGuide";
 import AdBanner from "@/components/AdBanner";
+import NativeAdCard from "@/components/NativeAdCard";
 
 const JAPAN_ID = JAPAN_TEAM_ID;
 
@@ -144,13 +145,17 @@ export default function ScheduleClient() {
               </div>
             ) : (
               <div className="space-y-3">
-                {matches.map((match) => (
-                  <MatchCard
-                    key={match.id}
-                    match={match}
-                    isNext={nextMatch?.id === match.id}
-                    selectedTeamIds={teamIds}
-                  />
+                {matches.map((match, index) => (
+                  <Fragment key={match.id}>
+                    <MatchCard
+                      match={match}
+                      isNext={nextMatch?.id === match.id}
+                      selectedTeamIds={teamIds}
+                    />
+                    {(index + 1) % 3 === 0 && index !== matches.length - 1 && (
+                      <NativeAdCard />
+                    )}
+                  </Fragment>
                 ))}
               </div>
             )}
