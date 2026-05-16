@@ -2,6 +2,7 @@
 
 import { Match, STAGE_LABELS, BROADCASTER_MAP, googleCalendarUrl, toJST, JAPAN_TEAM_ID, WC_TEAMS } from "@/lib/football";
 import { TEAM_META } from "@/lib/teamData";
+import MatchPredict from "@/components/MatchPredict";
 
 const DAZN_URL = process.env.NEXT_PUBLIC_DAZN_AFFILIATE_URL || "https://www.dazn.com/ja-JP/welcome";
 const JAPAN_ID = JAPAN_TEAM_ID;
@@ -146,11 +147,21 @@ export default function MatchCard({ match, isNext, isTBD, selectedTeamIds }: Mat
           href={DAZN_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 px-3 py-1.5 rounded-lg transition-colors font-medium"
+          className="text-xs bg-yellow-500/20 hover:bg-yellow/30 text-yellow-300 px-3 py-1.5 rounded-lg transition-colors font-medium"
         >
           ▶ DAZNで見る
         </a>
       </div>
+
+      {/* 勝敗予想投票 */}
+      {!isTBD && (match.status === "SCHEDULED" || match.status === "TIMED" || match.status === "FINISHED") && (
+        <MatchPredict
+          matchId={match.id}
+          homeTeam={match.homeTeam?.shortName || match.homeTeam?.name || "ホーム"}
+          awayTeam={match.awayTeam?.shortName || match.awayTeam?.name || "アウェイ"}
+          status={match.status}
+        />
+      )}
     </div>
   );
 }
