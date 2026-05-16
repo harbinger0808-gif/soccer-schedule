@@ -78,11 +78,11 @@ export default function MatchCard({ match, isNext, isTBD, selectedTeamIds }: Mat
       {/* 日時 */}
       <div className="text-sm text-white/60 mb-3 font-medium">{jst}</div>
 
-      {/* チーム */}
+      {/* チーム＋スコア */}
       <div className="flex items-center justify-between gap-2 mb-3">
-        <TeamDisplay team={match.homeTeam} meta={homeMeta} />
-        <div className="text-white/30 text-lg font-light shrink-0">vs</div>
-        <TeamDisplay team={match.awayTeam} meta={awayMeta} align="right" />
+        <TeamDisplay team={match.homeTeam} meta={homeMeta} winner={match.score?.winner === "HOME_TEAM"} />
+        <ScoreDisplay match={match} />
+        <TeamDisplay team={match.awayTeam} meta={awayMeta} align="right" winner={match.score?.winner === "AWAY_TEAM"} />
       </div>
 
       {/* 会場 */}
@@ -155,14 +155,46 @@ export default function MatchCard({ match, isNext, isTBD, selectedTeamIds }: Mat
   );
 }
 
+function ScoreDisplay({ match }: { match: Match }) {
+  const { status, score } = match;
+  const home = score?.fullTime?.home;
+  const away = score?.fullTime?.away;
+
+  if (status === "FINISHED" && home !== null && away !== null) {
+    return (
+      <div className="flex flex-col items-center shrink-0">
+        <div className="text-2xl font-bold tracking-widest text-white">
+          {home} <span className="text-white/30">-</span> {away}
+        </div>
+        <span className="text-[10px] text-white/40 mt-0.5">終了</span>
+      </div>
+    );
+  }
+
+  if (status === "IN_PLAY" || status === "PAUSED") {
+    return (
+      <div className="flex flex-col items-center shrink-0">
+        <div className="text-2xl font-bold tracking-widest text-[#1a9e3f]">
+          {home ?? 0} <span className="text-white/30">-</span> {away ?? 0}
+        </div>
+        <span className="text-[10px] text-[#1a9e3f] mt-0.5 animate-pulse font-bold">● LIVE</span>
+      </div>
+    );
+  }
+
+  return <div className="text-white/30 text-lg font-light shrink-0">vs</div>;
+}
+
 function TeamDisplay({
   team,
   meta,
   align,
+  winner,
 }: {
   team: Match["homeTeam"] | null;
   meta: { fifaRank?: number } | null;
   align?: "right";
+  winner?: boolean;
 }) {
   const name = team?.shortName || team?.name || "未定";
   const crest = team?.crest;
@@ -177,7 +209,7 @@ function TeamDisplay({
           ?
         </div>
       )}
-      <span className={`text-sm font-semibold leading-tight text-center ${!team?.id ? "text-white/40 italic" : ""}`}>
+      <span className={`text-sm font-semibold leading-tight text-center ${!team?.id ? "text-white/40 italic" : ""} ${winner ? "text-[#1a9e3f]" : ""}`}>
         {name}
       </span>
       {meta?.fifaRank && (

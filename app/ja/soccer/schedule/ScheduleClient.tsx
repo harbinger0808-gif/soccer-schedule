@@ -2,10 +2,11 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Match, WC_TEAMS, JAPAN_TEAM_ID } from "@/lib/football";
+import { Match, StandingGroup, WC_TEAMS, JAPAN_TEAM_ID } from "@/lib/football";
 import MatchCard from "@/components/MatchCard";
 import Countdown from "@/components/Countdown";
 import GoogleCalendarButton from "@/components/GoogleCalendarButton";
+import Standings from "@/components/Standings";
 import ViewingGuide from "@/components/ViewingGuide";
 import AdBanner from "@/components/AdBanner";
 
@@ -20,6 +21,7 @@ export default function ScheduleClient() {
 
   const [matches, setMatches] = useState<Match[]>([]);
   const [knockout, setKnockout] = useState<Match[]>([]);
+  const [standings, setStandings] = useState<StandingGroup[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showKnockout, setShowKnockout] = useState(false);
@@ -28,11 +30,18 @@ export default function ScheduleClient() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`/api/matches?teams=${teamParam}${isTest ? "&test=1" : ""}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      setMatches(data.matches ?? []);
-      setKnockout(data.knockout ?? []);
+      const [matchRes, standingsRes] = await Promise.all([
+        fetch(`/api/matches?teams=${teamParam}${isTest ? "&test=1" : ""}`),
+        fetch("/api/standings"),
+      ]);
+      if (!matchRes.ok) throw new Error(`HTTP ${matchRes.status}`);
+      const matchData = await matchRes.json();
+      setMatches(matchData.matches ?? []);
+      setKnockout(matchData.knockout ?? []);
+      if (standingsRes.ok) {
+        const standingsData = await standingsRes.json();
+        setStandings(standingsData.standings ?? []);
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "エラーが発生しました");
     } finally {
@@ -144,6 +153,11 @@ export default function ScheduleClient() {
                   />
                 ))}
               </div>
+            )}
+
+            {/* 順位表 */}
+            {standings.length > 0 && (
+              <Standings standings={standings} selectedTeamIds={teamIds} />
             )}
 
             {/* 観戦のお供 */}

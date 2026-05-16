@@ -135,6 +135,37 @@ export const BROADCASTER_MAP: Record<string, string[]> = {
 // W杯2026出場48カ国（football-data.org 実際のチームID）
 export const JAPAN_TEAM_ID = 766;
 
+// 順位表
+export interface StandingEntry {
+  position: number;
+  team: { id: number; name: string; shortName: string; tla: string; crest: string };
+  playedGames: number;
+  won: number;
+  draw: number;
+  lost: number;
+  points: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
+}
+
+export interface StandingGroup {
+  stage: string;
+  type: string;
+  group: string | null;
+  table: StandingEntry[];
+}
+
+export async function getStandings(): Promise<StandingGroup[]> {
+  const res = await fetch(`${BASE_URL}/competitions/WC/standings`, {
+    headers: { "X-Auth-Token": API_KEY! },
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  const data = await res.json();
+  return data.standings ?? [];
+}
+
 export const WC_TEAMS: { id: number; name: string; flag: string }[] = [
   { id: 766, name: "日本", flag: "🇯🇵" },
   { id: 762, name: "アルゼンチン", flag: "🇦🇷" },
