@@ -222,7 +222,7 @@ const ITEMS = [
       {
         label: "ABEMA プレミアム",
         desc: "一部試合を無料生中継。プレミアムで全試合",
-        url: "https://abema.tv/",
+        url: process.env.NEXT_PUBLIC_ABEMA_AFFILIATE_URL ?? "https://abema.tv/",
       },
       {
         label: "NHKプラス",
