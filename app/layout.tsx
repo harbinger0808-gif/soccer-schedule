@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import Script from "next/script";
 import SessionProvider from "@/components/SessionProvider";
 import "./globals.css";
 
@@ -61,21 +60,17 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-
   return (
     <html lang="ja" className={`${inter.variable} h-full`}>
       <head>
         {/* AdSense サイト確認 & 広告スクリプト */}
         <meta name="google-adsense-account" content="ca-pub-3890242142577791" />
-        {adsenseId && (
-          <Script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
-        )}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3890242142577791"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-h-full bg-[#0a1628] text-white antialiased">
         <SessionProvider>{children}</SessionProvider>
