@@ -66,6 +66,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja" className={`${inter.variable} h-full`}>
       <head>
+        {/* AdSense サイト確認 & 広告スクリプト */}
+        <meta name="google-adsense-account" content="ca-pub-3890242142577791" />
         {adsenseId && (
           <Script
             async
