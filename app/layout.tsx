@@ -8,8 +8,11 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const BASE_URL = "https://japan-wc2026.com";
 
+const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
+  ...(ADSENSE_ID ? { other: { "google-adsense-account": ADSENSE_ID } } : {}),
   title: {
     default: "W杯2026 日程＆カレンダー | ワールドカップ日本時間",
     template: "%s | W杯2026 日程",
