@@ -7,7 +7,7 @@ import { TEAM_META } from "@/lib/teamData";
 function marqueeScore(match: Match): number {
   const h = TEAM_META[match.homeTeam?.id ?? 0]?.fifaRank ?? 99;
   const a = TEAM_META[match.awayTeam?.id ?? 0]?.fifaRank ?? 99;
-  return Math.min(h, a);
+  return h + a;
 }
 
 function getFlag(teamId?: number): string {
