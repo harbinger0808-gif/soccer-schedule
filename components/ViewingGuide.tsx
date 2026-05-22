@@ -52,12 +52,12 @@ const ITEMS = [
       {
         label: "モンスターエナジー 355ml×24缶",
         desc: "深夜キックオフに向けてチャージ",
-        url: amazonUrl("B07BNTG2QG"),
+        url: amazonSearch("モンスターエナジー 355ml 24缶"),
       },
       {
         label: "レッドブル 250ml×24缶",
         desc: "眠気に打ち勝つ定番エナジードリンク",
-        url: amazonUrl("B003PXBF98"),
+        url: amazonSearch("レッドブル 250ml 24缶"),
       },
       {
         label: "眠眠打破 50ml×60本",
@@ -87,17 +87,17 @@ const ITEMS = [
       {
         label: "キリン一番搾り 350ml×24缶",
         desc: "観戦の定番。まとめ買いで安心",
-        url: amazonUrl("B07BQJG7BT"),
+        url: amazonSearch("キリン一番搾り 350ml 24缶"),
       },
       {
         label: "アサヒスーパードライ 350ml×24缶",
         desc: "キレのある味わいで試合を楽しむ",
-        url: amazonUrl("B07BPD6QJ7"),
+        url: amazonSearch("アサヒスーパードライ 350ml 24缶"),
       },
       {
         label: "コカ・コーラ 500ml×24本",
         desc: "ノンアルでも盛り上がれる定番",
-        url: amazonUrl("B01N7VKNI4"),
+        url: amazonSearch("コカ・コーラ 500ml 24本"),
       },
       {
         label: "三ツ矢サイダー 500ml×24本",
@@ -112,7 +112,7 @@ const ITEMS = [
       {
         label: "ポカリスエット 500ml×24本",
         desc: "深夜観戦で意外と汗かく。スポーツドリンクで補給",
-        url: amazonUrl("B001V9QLIY"),
+        url: amazonSearch("ポカリスエット 500ml 24本"),
       },
     ],
   },
@@ -127,7 +127,7 @@ const ITEMS = [
       {
         label: "亀田の柿の種 10袋詰め",
         desc: "ピリ辛でビールが進む定番おつまみ",
-        url: amazonUrl("B07CWS3RNR"),
+        url: amazonSearch("亀田の柿の種 10袋"),
       },
       {
         label: "じゃがりこ まとめ買い",
@@ -155,6 +155,11 @@ const ITEMS = [
     category: "📚 戦術本・名鑑",
     items: [
       {
+        label: "エル・ゴラッソ W杯特集",
+        desc: "サッカー専門紙のW杯2026完全ガイド",
+        url: amazonSearch("エルゴラッソ ワールドカップ 2026"),
+      },
+      {
         label: "サッカー戦術の教科書",
         desc: "フォーメーションが分かると試合が10倍面白い",
         url: amazonSearch("サッカー 戦術 本 入門"),
@@ -179,11 +184,6 @@ const ITEMS = [
         desc: "オフサイド・プレスの仕組みを図解で解説",
         url: amazonSearch("図解 サッカー 戦術 入門 わかりやすい"),
       },
-      {
-        label: "サッカー選手名鑑2026",
-        desc: "全出場国のスター選手を一冊で把握",
-        url: amazonSearch("サッカー 選手名鑑 2026"),
-      },
     ],
   },
   {
@@ -192,12 +192,12 @@ const ITEMS = [
       {
         label: "Fire TV Stick 4K",
         desc: "テレビでDAZN・ABEMAをフル画面で",
-        url: amazonUrl("B09SWJXZ9Y"),
+        url: amazonSearch("Fire TV Stick 4K 第3世代"),
       },
       {
         label: "Anker モバイルバッテリー 20000mAh",
         desc: "外出先でスマホ観戦するなら必須",
-        url: amazonUrl("B08LG2X98F"),
+        url: amazonSearch("Anker モバイルバッテリー 20000mAh"),
       },
       {
         label: "小型プロジェクター 家庭用",
@@ -208,6 +208,51 @@ const ITEMS = [
         label: "ワイヤレスイヤホン",
         desc: "深夜観戦で家族を起こさない",
         url: amazonSearch("ワイヤレスイヤホン Bluetooth 高音質"),
+      },
+      {
+        label: "4Kテレビ 55インチ",
+        desc: "W杯を機に大画面へ。臨場感が別格",
+        url: amazonSearch("4Kテレビ 55インチ"),
+      },
+      {
+        label: "HDMIケーブル 2m",
+        desc: "PCやスマホをテレビに繋いで大画面観戦",
+        url: amazonSearch("HDMIケーブル 2m 4K"),
+      },
+    ],
+  },
+  {
+    category: "🎥 W杯動画・読み物",
+    items: [
+      {
+        label: "FIFA公式YouTube",
+        desc: "歴代ゴール・名場面が無料で見放題",
+        url: "https://www.youtube.com/@FIFA",
+      },
+      {
+        label: "NHK W杯特集",
+        desc: "NHKの詳細解説・試合情報",
+        url: "https://www3.nhk.or.jp/sports/",
+      },
+      {
+        label: "Goal.com 日本語版",
+        desc: "最新ニュース・移籍情報・試合速報",
+        url: "https://www.goal.com/jp",
+      },
+      {
+        label: "サッカーキング",
+        desc: "日本語サッカーメディアの定番",
+        url: "https://www.soccer-king.jp/",
+      },
+      {
+        label: "footballista",
+        desc: "戦術・分析に強い専門メディア",
+        url: "https://www.footballista.jp/",
+      },
+      {
+        label: "DAZN W杯ハイライト",
+        desc: "見逃した試合もDAZNでチェック",
+        url: process.env.NEXT_PUBLIC_DAZN_AFFILIATE_URL ?? "https://www.dazn.com/ja-JP/welcome",
       },
     ],
   },
@@ -249,7 +294,7 @@ export default function ViewingGuide() {
         {ITEMS.map((section) => (
           <div key={section.category}>
             <div className="text-xs text-white/40 mb-2 font-medium">{section.category}</div>
-            <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
+            <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {section.items.map((item) => (
                 <a
                   key={item.label}
