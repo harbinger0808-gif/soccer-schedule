@@ -1,15 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { WC_TEAMS, JAPAN_TEAM_ID } from "@/lib/football";
+import { WC_TEAMS, JAPAN_TEAM_ID, Match } from "@/lib/football";
 import { TEAM_META } from "@/lib/teamData";
+import FeaturedMatches from "@/components/FeaturedMatches";
 
 const JAPAN_ID = JAPAN_TEAM_ID;
 
 export default function SoccerPage() {
   const router = useRouter();
   const [selected, setSelected] = useState<number[]>([JAPAN_ID]);
+  const [allMatches, setAllMatches] = useState<Match[]>([]);
+
+  useEffect(() => {
+    // 注目試合用に全試合を取得
+    fetch("/api/matches?teams=all")
+      .then((r) => r.json())
+      .then((d) => setAllMatches(d.matches ?? []))
+      .catch(() => {});
+  }, []);
 
   function toggle(id: number) {
     setSelected((prev) =>
@@ -80,6 +90,13 @@ export default function SoccerPage() {
             )}
           </button>
         </div>
+
+        {/* 注目試合 */}
+        {allMatches.length > 0 && (
+          <div className="mb-6">
+            <FeaturedMatches matches={allMatches} />
+          </div>
+        )}
 
         {/* 全カ国グリッド */}
         <div className="mb-4 flex items-center justify-between">
