@@ -1,24 +1,13 @@
 "use client";
 
 import { Match, googleCalendarUrl, toJST, JAPAN_TEAM_ID } from "@/lib/football";
+import { TEAM_META } from "@/lib/teamData";
 
-// 注目カードとして表示するマッチアップ（チームIDペア）
-const MARQUEE_PAIRS = [
-  [764, 762],   // ブラジル vs アルゼンチン
-  [773, 770],   // フランス vs イングランド
-  [760, 759],   // スペイン vs ドイツ
-  [765, 805],   // ポルトガル vs ベルギー
-  [764, 773],   // ブラジル vs フランス
-  [762, 760],   // アルゼンチン vs スペイン
-];
-
-function isMarquee(match: Match): boolean {
-  const h = match.homeTeam?.id;
-  const a = match.awayTeam?.id;
-  if (!h || !a) return false;
-  return MARQUEE_PAIRS.some(
-    ([x, y]) => (h === x && a === y) || (h === y && a === x)
-  );
+// 両チームのFIFAランク合計が低い（＝強豪同士）ほどスコアが低い
+function marqueeScore(match: Match): number {
+  const h = TEAM_META[match.homeTeam?.id ?? 0]?.fifaRank ?? 99;
+  const a = TEAM_META[match.awayTeam?.id ?? 0]?.fifaRank ?? 99;
+  return h + a;
 }
 
 interface Props {
@@ -28,12 +17,22 @@ interface Props {
 export default function FeaturedMatches({ matches }: Props) {
   const now = Date.now();
 
-  // 日本戦 + 注目カード（終了済み除外）
-  const featured = matches.filter((m) => {
-    if (new Date(m.utcDate).getTime() < now - 2 * 60 * 60 * 1000) return false; // 2時間前まで
-    const isJapan = m.homeTeam?.id === JAPAN_TEAM_ID || m.awayTeam?.id === JAPAN_TEAM_ID;
-    return isJapan || isMarquee(m);
-  }).slice(0, 5);
+  const upcoming = matches.filter(
+    (m) => new Date(m.utcDate).getTime() > now - 2 * 60 * 60 * 1000
+  );
+
+  // 日本戦
+  const japanMatches = upcoming.filter(
+    (m) => m.homeTeam?.id === JAPAN_TEAM_ID || m.awayTeam?.id === JAPAN_TEAM_ID
+  );
+
+  // 強豪同士の好カード（日本戦除く・FIFA合計ランク上位）
+  const marqueeMatches = upcoming
+    .filter((m) => m.homeTeam?.id !== JAPAN_TEAM_ID && m.awayTeam?.id !== JAPAN_TEAM_ID)
+    .sort((a, b) => marqueeScore(a) - marqueeScore(b))
+    .slice(0, 3 - Math.min(japanMatches.length, 2));
+
+  const featured = [...japanMatches.slice(0, 2), ...marqueeMatches].slice(0, 5);
 
   if (featured.length === 0) return null;
 
