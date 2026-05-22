@@ -32,10 +32,55 @@ export default function FeaturedMatches({ matches }: Props) {
     .sort((a, b) => marqueeScore(a) - marqueeScore(b))
     .slice(0, 5);
 
-  if (featured.length === 0) return null;
+  // ノルウェー(8872) vs フランス(773) の激アツカード
+  const hotMatch = matches.find(
+    (m) =>
+      (m.homeTeam?.id === 8872 && m.awayTeam?.id === 773) ||
+      (m.homeTeam?.id === 773 && m.awayTeam?.id === 8872)
+  );
+
+  if (featured.length === 0 && !hotMatch) return null;
 
   return (
     <div className="mb-6">
+      {/* 激アツ特別枠 */}
+      {hotMatch && (
+        <div className="mb-4">
+          <div className="text-xs text-white/40 mb-2 font-medium">⚡ 個人的激アツカード</div>
+          <div className="relative px-3 py-3 rounded-xl border border-[#f97316]/40 bg-gradient-to-r from-[#f97316]/10 to-[#ef4444]/10 overflow-hidden">
+            <div className="absolute top-1 right-2 text-[10px] text-orange-400/60 font-bold">FIFA 2位 強豪が格下に挑む</div>
+            <div className="flex items-center gap-3 mt-3">
+              <div className="flex items-center gap-1.5 flex-1">
+                <span className="text-2xl">{getFlag(hotMatch.homeTeam?.id)}</span>
+                <div>
+                  <div className="text-sm font-bold text-white">{hotMatch.homeTeam?.shortName || hotMatch.homeTeam?.name}</div>
+                  <div className="text-[10px] text-white/30">FIFA {TEAM_META[hotMatch.homeTeam?.id ?? 0]?.fifaRank}位</div>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-white/40">vs</div>
+                <div className="text-[10px] text-white/30 mt-0.5">{toJST(hotMatch.utcDate).split(" ")[0]}</div>
+              </div>
+              <div className="flex items-center gap-1.5 flex-1 justify-end">
+                <div className="text-right">
+                  <div className="text-sm font-bold text-white">{hotMatch.awayTeam?.shortName || hotMatch.awayTeam?.name}</div>
+                  <div className="text-[10px] text-white/30">FIFA {TEAM_META[hotMatch.awayTeam?.id ?? 0]?.fifaRank}位</div>
+                </div>
+                <span className="text-2xl">{getFlag(hotMatch.awayTeam?.id)}</span>
+              </div>
+              <a
+                href={googleCalendarUrl(hotMatch)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 text-xs font-bold px-2.5 py-1.5 rounded-lg bg-[#f97316] hover:bg-[#ea6a00] text-white transition-colors"
+              >
+                📅
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="text-xs text-white/40 mb-2 font-medium">🔥 注目試合</div>
       <div className="space-y-2">
         {featured.map((match) => {
