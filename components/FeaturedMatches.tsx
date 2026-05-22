@@ -26,7 +26,7 @@ export default function FeaturedMatches({ matches }: Props) {
       return true;
     })
     .sort((a, b) => marqueeScore(a) - marqueeScore(b))
-    .slice(0, 4);
+    .slice(0, 5);
 
   if (featured.length === 0) return null;
 
