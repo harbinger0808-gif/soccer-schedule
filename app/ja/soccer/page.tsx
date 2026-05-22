@@ -31,7 +31,9 @@ export default function SoccerPage() {
   }
 
   const japan = WC_TEAMS.find((t) => t.id === JAPAN_ID)!;
-  const others = WC_TEAMS.filter((t) => t.id !== JAPAN_ID);
+  const others = WC_TEAMS
+    .filter((t) => t.id !== JAPAN_ID)
+    .sort((a, b) => (TEAM_META[a.id]?.fifaRank ?? 999) - (TEAM_META[b.id]?.fifaRank ?? 999));
 
   return (
     <main className="min-h-screen bg-[#0a1628] text-white">
