@@ -10,7 +10,6 @@ import Standings from "@/components/Standings";
 import ViewingGuide from "@/components/ViewingGuide";
 import AdBanner from "@/components/AdBanner";
 import NativeAdCard from "@/components/NativeAdCard";
-import FeaturedMatches from "@/components/FeaturedMatches";
 
 const JAPAN_ID = JAPAN_TEAM_ID;
 
@@ -96,9 +95,6 @@ export default function ScheduleClient() {
             📅 .icsでダウンロード（iPhone・Outlook対応）
           </a>
         </div>
-
-        {/* 注目試合 */}
-        {matches.length > 0 && <FeaturedMatches matches={[...matches, ...knockout]} />}
 
         {/* 広告バナー */}
         <AdBanner slot="1234567890" format="horizontal" className="mb-4" />
