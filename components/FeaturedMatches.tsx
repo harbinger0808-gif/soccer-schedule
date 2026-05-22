@@ -1,6 +1,7 @@
 "use client";
 
 import { Match, googleCalendarUrl, toJST, JAPAN_TEAM_ID } from "@/lib/football";
+// JAPAN_TEAM_IDは日本戦除外フィルタで使用
 import { TEAM_META } from "@/lib/teamData";
 
 // 両チームのFIFAランク合計が低い（＝強豪同士）ほどスコアが低い
@@ -17,22 +18,15 @@ interface Props {
 export default function FeaturedMatches({ matches }: Props) {
   const now = Date.now();
 
-  const upcoming = matches.filter(
-    (m) => new Date(m.utcDate).getTime() > now - 2 * 60 * 60 * 1000
-  );
-
-  // 日本戦
-  const japanMatches = upcoming.filter(
-    (m) => m.homeTeam?.id === JAPAN_TEAM_ID || m.awayTeam?.id === JAPAN_TEAM_ID
-  );
-
-  // 強豪同士の好カード（日本戦除く・FIFA合計ランク上位）
-  const marqueeMatches = upcoming
-    .filter((m) => m.homeTeam?.id !== JAPAN_TEAM_ID && m.awayTeam?.id !== JAPAN_TEAM_ID)
+  // 日本戦除く・終了済み除く・FIFA合計ランク上位4試合
+  const featured = matches
+    .filter((m) => {
+      if (new Date(m.utcDate).getTime() < now - 2 * 60 * 60 * 1000) return false;
+      if (m.homeTeam?.id === JAPAN_TEAM_ID || m.awayTeam?.id === JAPAN_TEAM_ID) return false;
+      return true;
+    })
     .sort((a, b) => marqueeScore(a) - marqueeScore(b))
-    .slice(0, 3 - Math.min(japanMatches.length, 2));
-
-  const featured = [...japanMatches.slice(0, 2), ...marqueeMatches].slice(0, 5);
+    .slice(0, 4);
 
   if (featured.length === 0) return null;
 
@@ -43,29 +37,26 @@ export default function FeaturedMatches({ matches }: Props) {
       </h2>
       <div className="space-y-2">
         {featured.map((match) => {
-          const isJapan =
-            match.homeTeam?.id === JAPAN_TEAM_ID ||
-            match.awayTeam?.id === JAPAN_TEAM_ID;
           const gcUrl = googleCalendarUrl(match);
           const jst = toJST(match.utcDate);
           const home = match.homeTeam?.shortName || match.homeTeam?.name || "未定";
           const away = match.awayTeam?.shortName || match.awayTeam?.name || "未定";
-          const homeFlag = match.homeTeam?.id === JAPAN_TEAM_ID ? "🇯🇵" : "";
-          const awayFlag = match.awayTeam?.id === JAPAN_TEAM_ID ? "🇯🇵" : "";
+          const homeRank = TEAM_META[match.homeTeam?.id ?? 0]?.fifaRank;
+          const awayRank = TEAM_META[match.awayTeam?.id ?? 0]?.fifaRank;
 
           return (
             <div
               key={match.id}
-              className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl border transition-all ${
-                isJapan
-                  ? "border-[#bc002d]/40 bg-[#bc002d]/10"
-                  : "border-white/10 bg-white/5"
-              }`}
+              className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl border border-white/10 bg-white/5 transition-all hover:bg-white/10"
             >
               {/* 試合情報 */}
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-bold text-white leading-tight">
-                  {homeFlag}{home} <span className="text-white/30 font-normal">vs</span> {awayFlag}{away}
+                  {home}
+                  {homeRank && <span className="text-[10px] text-white/30 font-normal ml-1">FIFA {homeRank}位</span>}
+                  <span className="text-white/30 font-normal mx-1">vs</span>
+                  {away}
+                  {awayRank && <span className="text-[10px] text-white/30 font-normal ml-1">FIFA {awayRank}位</span>}
                 </div>
                 <div className="text-xs text-white/40 mt-0.5">{jst}</div>
               </div>
@@ -75,11 +66,7 @@ export default function FeaturedMatches({ matches }: Props) {
                 href={gcUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex-shrink-0 text-xs font-bold px-3 py-2 rounded-lg transition-colors ${
-                  isJapan
-                    ? "bg-[#bc002d] hover:bg-[#9a0024] text-white"
-                    : "bg-[#1a9e3f] hover:bg-[#15803d] text-white"
-                }`}
+                className="flex-shrink-0 text-xs font-bold px-3 py-2 rounded-lg transition-colors bg-[#1a9e3f] hover:bg-[#15803d] text-white"
               >
                 📅 追加
               </a>
