@@ -10,7 +10,7 @@ function marqueeScore(match: Match): number {
   return h + a;
 }
 
-function getFlag(teamId?: number): string {
+function getFlag(teamId?: number | null): string {
   if (!teamId) return "";
   return WC_TEAMS.find((t) => t.id === teamId)?.flag ?? "";
 }
