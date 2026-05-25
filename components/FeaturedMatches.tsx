@@ -112,7 +112,7 @@ export default function FeaturedMatches({ matches }: Props) {
               {/* 日時 */}
               <div className="text-center flex-shrink-0">
                 <div className="text-[10px] text-white/30 font-medium">vs</div>
-                <div className="text-[10px] text-white/40 mt-0.5 whitespace-nowrap">{jst.split(" ")[0]}</div>
+                <div className="text-[10px] text-white/40 mt-0.5 whitespace-nowrap">{jst}</div>
               </div>
 
               {/* アウェイ */}
