@@ -48,23 +48,25 @@ export default function FeaturedMatches({ matches }: Props) {
         <div className="mb-4">
           <div className="text-xs text-white/40 mb-2 font-medium">⚡ 個人的激アツカード</div>
           <div className="relative px-3 py-3 rounded-xl border border-[#f97316]/40 bg-gradient-to-r from-[#f97316]/10 to-[#ef4444]/10 overflow-hidden">
-            <div className="absolute top-1 right-2 text-[10px] text-orange-400/60 font-bold">FIFA 2位 強豪が格下に挑む</div>
-            <div className="flex items-center gap-3 mt-3">
+            {/* 日時 */}
+            <div className="text-[10px] text-orange-400/70 font-bold mb-2">{toJST(hotMatch.utcDate)}</div>
+            <div className="flex items-center gap-3">
+              {/* ホーム */}
               <div className="flex items-center gap-1.5 flex-1">
                 <span className="text-2xl">{getFlag(hotMatch.homeTeam?.id)}</span>
                 <div>
                   <div className="text-sm font-bold text-white">{hotMatch.homeTeam?.shortName || hotMatch.homeTeam?.name}</div>
                   <div className="text-[10px] text-white/30">FIFA {TEAM_META[hotMatch.homeTeam?.id ?? 0]?.fifaRank}位</div>
+                  <div className="text-[10px] text-orange-300/70 font-bold">⚡ ハーランド</div>
                 </div>
               </div>
-              <div className="text-center">
-                <div className="text-xs text-white/40">vs</div>
-                <div className="text-[10px] text-white/30 mt-0.5">{toJST(hotMatch.utcDate).split(" ")[0]}</div>
-              </div>
+              <div className="text-center text-xs text-white/40">vs</div>
+              {/* アウェイ */}
               <div className="flex items-center gap-1.5 flex-1 justify-end">
                 <div className="text-right">
                   <div className="text-sm font-bold text-white">{hotMatch.awayTeam?.shortName || hotMatch.awayTeam?.name}</div>
                   <div className="text-[10px] text-white/30">FIFA {TEAM_META[hotMatch.awayTeam?.id ?? 0]?.fifaRank}位</div>
+                  <div className="text-[10px] text-orange-300/70 font-bold">エンバペ ⚡</div>
                 </div>
                 <span className="text-2xl">{getFlag(hotMatch.awayTeam?.id)}</span>
               </div>
