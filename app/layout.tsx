@@ -64,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ja" className={`${inter.variable} h-full`}>
       <head>
         {/* AdSense サイト確認 & 広告スクリプト */}
+        <meta name="google-site-verification" content="ZixbGFImGNxLI1V-sh0tc1TePaWe1WV_SEbNSDUZVl0" />
         <meta name="google-adsense-account" content="ca-pub-3890242142577791" />
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script
