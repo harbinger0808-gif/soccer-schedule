@@ -167,6 +167,13 @@ export default function SoccerPage() {
               : `${selected.length}カ国の試合を見る →`}
           </button>
         </div>
+
+        {/* フッターリンク */}
+        <div className="flex gap-4 justify-center pt-6 pb-2 text-xs text-white/20">
+          <a href="/about" className="hover:text-white/40">このサイトについて</a>
+          <a href="/privacy" className="hover:text-white/40">プライバシーポリシー</a>
+          <a href="/terms" className="hover:text-white/40">利用規約</a>
+        </div>
       </div>
     </main>
   );

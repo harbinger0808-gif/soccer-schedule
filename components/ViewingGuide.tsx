@@ -315,6 +315,10 @@ export default function ViewingGuide() {
       <p className="text-xs text-white/20 mt-4">
         ※ 一部リンクはアフィリエイト広告を含みます ·{" "}
         <a href="/privacy" className="hover:text-white/40 underline">プライバシーポリシー</a>
+        {" · "}
+        <a href="/terms" className="hover:text-white/40 underline">利用規約</a>
+        {" · "}
+        <a href="/about" className="hover:text-white/40 underline">このサイトについて</a>
       </p>
     </div>
   );
