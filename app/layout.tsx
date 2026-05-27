@@ -65,6 +65,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* AdSense サイト確認 & 広告スクリプト */}
         <meta name="google-site-verification" content="ZixbGFImGNxLI1V-sh0tc1TePaWe1WV_SEbNSDUZVl0" />
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-43LBY3MBWM" />
+        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-43LBY3MBWM');` }} />
         <meta name="google-adsense-account" content="ca-pub-3890242142577791" />
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script
