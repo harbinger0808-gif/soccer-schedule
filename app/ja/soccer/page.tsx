@@ -98,6 +98,18 @@ export default function SoccerPage() {
           </div>
         )}
 
+        {/* グループ解説リンク */}
+        <a
+          href="/groups"
+          className="flex items-center justify-between w-full mb-6 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
+        >
+          <div>
+            <div className="text-sm font-bold text-white">📋 グループ別 徹底解説</div>
+            <div className="text-xs text-white/40 mt-0.5">全12グループの見どころ・突破予想をチェック</div>
+          </div>
+          <div className="text-white/30 text-lg">→</div>
+        </a>
+
         {/* 全カ国グリッド */}
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xs font-semibold text-white/40 uppercase tracking-widest">
