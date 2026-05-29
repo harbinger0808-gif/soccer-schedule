@@ -10,6 +10,7 @@ import Standings from "@/components/Standings";
 import ViewingGuide from "@/components/ViewingGuide";
 import AdBanner from "@/components/AdBanner";
 import NativeAdCard from "@/components/NativeAdCard";
+import IMobileAd from "@/components/IMobileAd";
 
 const JAPAN_ID = JAPAN_TEAM_ID;
 
@@ -98,6 +99,7 @@ export default function ScheduleClient() {
 
         {/* 広告バナー */}
         <AdBanner slot="1234567890" format="horizontal" className="mb-4" />
+        <IMobileAd />
 
         {/* ローディング / エラー */}
         {loading && (

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { WC_TEAMS, JAPAN_TEAM_ID, Match } from "@/lib/football";
 import { TEAM_META } from "@/lib/teamData";
 import FeaturedMatches from "@/components/FeaturedMatches";
+import IMobileAd from "@/components/IMobileAd";
 
 const JAPAN_ID = JAPAN_TEAM_ID;
 
@@ -179,6 +180,9 @@ export default function SoccerPage() {
               : `${selected.length}カ国の試合を見る →`}
           </button>
         </div>
+
+        {/* 広告 */}
+        <IMobileAd />
 
         {/* フッターリンク */}
         <div className="flex gap-4 justify-center pt-6 pb-2 text-xs text-white/20">
