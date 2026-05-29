@@ -153,11 +153,8 @@ export default function ScheduleClient() {
                       isNext={nextMatch?.id === match.id}
                       selectedTeamIds={teamIds}
                     />
-                    {(index + 1) % 10 === 0 && index !== matches.length - 1 && (
-                      <IMobileAd />
-                    )}
-                    {(index + 1) % 5 === 0 && (index + 1) % 10 !== 0 && index !== matches.length - 1 && (
-                      <NativeAdCard />
+                    {(index + 1) % 5 === 0 && index !== matches.length - 1 && (
+                      (index + 1) % 10 === 0 ? <IMobileAd /> : <NativeAdCard />
                     )}
                   </Fragment>
                 ))}
