@@ -99,7 +99,6 @@ export default function ScheduleClient() {
 
         {/* 広告バナー */}
         <AdBanner slot="1234567890" format="horizontal" className="mb-4" />
-        <IMobileAd />
 
         {/* ローディング / エラー */}
         {loading && (
@@ -154,7 +153,10 @@ export default function ScheduleClient() {
                       isNext={nextMatch?.id === match.id}
                       selectedTeamIds={teamIds}
                     />
-                    {(index + 1) % 3 === 0 && index !== matches.length - 1 && (
+                    {(index + 1) % 10 === 0 && index !== matches.length - 1 && (
+                      <IMobileAd />
+                    )}
+                    {(index + 1) % 5 === 0 && (index + 1) % 10 !== 0 && index !== matches.length - 1 && (
                       <NativeAdCard />
                     )}
                   </Fragment>
