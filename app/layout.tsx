@@ -75,6 +75,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3890242142577791"
           crossOrigin="anonymous"
         />
+        {/* i-mobile */}
+        <script async src="https://imp-adedge.i-mobile.co.jp/script/v1/spot.js?20220104" />
       </head>
       <body className="min-h-full bg-[#0a1628] text-white antialiased">
         <SessionProvider>{children}</SessionProvider>
