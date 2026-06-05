@@ -301,10 +301,10 @@ export default function ViewingGuide() {
         <div className="min-w-0 flex-1">
           <div className="text-[10px] font-bold text-yellow-300 tracking-widest mb-0.5">おすすめ · PR</div>
           <div className="text-sm font-extrabold text-white leading-tight">
-            エル・ゴラッソ W杯2026 特集号
+            エル・ゴラッソ W杯2026 出場国完全ガイド
           </div>
           <div className="text-xs text-white/50 mt-0.5">
-            サッカー専門紙が総力取材。出場国・注目選手・組み合わせの完全ガイド
+            出場48カ国を完全網羅。各国の戦力・注目選手・組み合わせをサッカー専門紙が徹底解説。どの国を応援する人にも
           </div>
         </div>
         <div className="flex-shrink-0 text-xs font-bold text-black bg-yellow-400 rounded-full px-3 py-1.5">
