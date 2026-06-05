@@ -123,6 +123,18 @@ export default function SoccerPage() {
           <div className="text-white/30 text-lg">→</div>
         </a>
 
+        {/* 歴代記録 解説リンク */}
+        <a
+          href="/ja/soccer/history"
+          className="flex items-center justify-between w-full mb-6 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
+        >
+          <div>
+            <div className="text-sm font-bold text-white">📜 歴代W杯 優勝国・記録</div>
+            <div className="text-xs text-white/40 mt-0.5">全22大会の優勝国・優勝回数ランキング・日本代表の歴代成績</div>
+          </div>
+          <div className="text-white/30 text-lg">→</div>
+        </a>
+
         {/* 全カ国グリッド */}
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xs font-semibold text-white/40 uppercase tracking-widest">
@@ -199,6 +211,7 @@ export default function SoccerPage() {
         {/* フッターリンク */}
         <div className="flex gap-4 justify-center pt-6 pb-2 text-xs text-white/20 flex-wrap">
           <a href="/ja/soccer/knockout" className="hover:text-white/40">決勝トーナメントの仕組み</a>
+          <a href="/ja/soccer/history" className="hover:text-white/40">歴代W杯の記録</a>
           <a href="/about" className="hover:text-white/40">このサイトについて</a>
           <a href="/privacy" className="hover:text-white/40">プライバシーポリシー</a>
           <a href="/terms" className="hover:text-white/40">利用規約</a>
