@@ -75,6 +75,35 @@ const JAPAN = [
   { year: 2022, result: "ベスト16", note: "ドイツ・スペインを撃破して突破" },
 ];
 
+// 歴代得点王（ゴールデンブーツ／史実・主要大会）
+const SCORERS = [
+  { year: 1930, name: "G・スタビレ", country: "アルゼンチン", goals: "8" },
+  { year: 1950, name: "アデミール", country: "ブラジル", goals: "8" },
+  { year: 1954, name: "S・コチシュ", country: "ハンガリー", goals: "11" },
+  { year: 1958, name: "J・フォンテーヌ", country: "フランス", goals: "13 ★" },
+  { year: 1966, name: "エウゼビオ", country: "ポルトガル", goals: "9" },
+  { year: 1970, name: "G・ミュラー", country: "西ドイツ", goals: "10" },
+  { year: 1986, name: "G・リネカー", country: "イングランド", goals: "6" },
+  { year: 1990, name: "S・スキラッチ", country: "イタリア", goals: "6" },
+  { year: 2002, name: "ロナウド", country: "ブラジル", goals: "8" },
+  { year: 2006, name: "M・クローゼ", country: "ドイツ", goals: "5" },
+  { year: 2014, name: "J・ロドリゲス", country: "コロンビア", goals: "6" },
+  { year: 2018, name: "H・ケイン", country: "イングランド", goals: "6" },
+  { year: 2022, name: "K・エムバペ", country: "フランス", goals: "8" },
+];
+
+// 記憶に残る名場面（史実）
+const EPISODES = [
+  { title: "ペレ、17歳の戴冠（1958）", text: "10代のペレが決勝で2得点。ブラジル初優勝の立役者となり、世界に衝撃を与えた。" },
+  { title: "マラカナンの悲劇（1950）", text: "地元ブラジルが最終戦でウルグアイに敗れまさかの準優勝。20万人の大観衆が沈黙した。" },
+  { title: "マラドーナ、2つの伝説（1986）", text: "対イングランド戦で『神の手』ゴールと5人抜きの『世紀のゴール』を同じ試合で。アルゼンチンを優勝へ導いた。" },
+  { title: "ジダンの頭突き退場（2006・決勝）", text: "フランスの英雄が延長で相手選手に頭突きし一発退場。PK戦の末イタリアが優勝した。" },
+  { title: "ミネイロンの惨劇（2014）", text: "準決勝で地元ブラジルがドイツに1–7の歴史的大敗。サッカー王国が崩れた一戦。" },
+  { title: "メッシ、悲願のW杯（2022）", text: "決勝でフランスと3–3、PK戦を制してアルゼンチンが優勝。エムバペは決勝ハットトリックの記録。" },
+  { title: "🇯🇵 ドイツ・スペイン撃破（2022）", text: "日本が優勝経験国2カ国を相次いで逆転で破り、グループ首位で決勝トーナメントへ。" },
+  { title: "🇯🇵 ベルギーの悪夢（2018）", text: "2–0からまさかの逆転負け。あと一歩のベスト8を逃した、語り継がれる激闘。" },
+];
+
 const FAQ = [
   {
     q: "ワールドカップで最も優勝回数が多い国はどこですか？",
@@ -87,6 +116,10 @@ const FAQ = [
   {
     q: "日本代表のワールドカップ最高成績は？",
     a: "ベスト16です。2002・2010・2018・2022年の4回、決勝トーナメントに進出していますが、ベスト8（新たな景色）にはまだ到達していません。2026年大会での悲願達成が期待されています。",
+  },
+  {
+    q: "ワールドカップの1大会最多得点記録は？",
+    a: "1958年スウェーデン大会でフランスのジュスト・フォンテーヌが記録した13得点が、今も破られていない単一大会の最多得点記録です。通算では、ドイツのミロスラフ・クローゼが4大会で挙げた16得点が歴代最多です。",
   },
 ];
 
@@ -212,6 +245,50 @@ export default function HistoryPage() {
             <p className="text-xs text-white/40 mt-3">
               日本の最高成績はベスト16。ベスト8＝「新たな景色」が2026年大会の悲願です。
             </p>
+          </section>
+
+          {/* 歴代得点王 */}
+          <section>
+            <h2 className="text-white font-bold text-base mb-3">⚽ 歴代得点王（主な大会）</h2>
+            <div className="overflow-hidden rounded-xl border border-white/10">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="bg-white/10 text-white/70">
+                    <th className="text-left px-3 py-2 font-semibold">年</th>
+                    <th className="text-left px-3 py-2 font-semibold">選手</th>
+                    <th className="text-left px-3 py-2 font-semibold">国</th>
+                    <th className="text-center px-3 py-2 font-semibold">得点</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {SCORERS.map((s, i) => (
+                    <tr key={s.year} className={i % 2 === 0 ? "bg-white/[0.02]" : ""}>
+                      <td className="px-3 py-2 font-bold text-white">{s.year}</td>
+                      <td className="px-3 py-2 text-white/80">{s.name}</td>
+                      <td className="px-3 py-2 text-white/50">{s.country}</td>
+                      <td className="px-3 py-2 text-center text-yellow-300 font-bold">{s.goals}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-white/40 mt-3">
+              ★ フォンテーヌの13得点（1958）は今も破られない単一大会の最多記録。通算最多得点はM・クローゼの16得点。<br />
+              ※ 初期大会の得点数は集計資料により異なる場合があります。
+            </p>
+          </section>
+
+          {/* 記憶に残る名場面 */}
+          <section>
+            <h2 className="text-white font-bold text-base mb-3">🔥 記憶に残る名場面</h2>
+            <div className="space-y-3">
+              {EPISODES.map((e) => (
+                <div key={e.title} className="rounded-xl border border-white/10 bg-white/5 p-4">
+                  <div className="text-white font-bold text-sm mb-1">{e.title}</div>
+                  <div className="text-white/60 text-sm">{e.text}</div>
+                </div>
+              ))}
+            </div>
           </section>
 
           {/* よくある質問 */}
