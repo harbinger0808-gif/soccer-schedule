@@ -10,6 +10,13 @@ function amazonSearch(q: string) {
   return `https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}&tag=${AMAZON_TAG}`;
 }
 
+function amazonUrl(asin: string) {
+  return `https://www.amazon.co.jp/dp/${asin}?tag=${AMAZON_TAG}`;
+}
+
+// エル・ゴラッソ 2026北中米W杯 48カ国選手名鑑
+const ELGOLAZO_ASIN = "B0GY68MZ85";
+
 const ITEMS = [
   {
     category: "🪑 観戦グッズ",
@@ -155,9 +162,9 @@ const ITEMS = [
     category: "📚 戦術本・名鑑",
     items: [
       {
-        label: "エル・ゴラッソ W杯特集",
-        desc: "サッカー専門紙のW杯2026完全ガイド",
-        url: amazonSearch("エルゴラッソ ワールドカップ 2026"),
+        label: "エル・ゴラッソ 48カ国選手名鑑",
+        desc: "出場48カ国・候補1,542人掲載の完全ガイド",
+        url: amazonUrl(ELGOLAZO_ASIN),
       },
       {
         label: "サッカー戦術の教科書",
@@ -292,19 +299,19 @@ export default function ViewingGuide() {
 
       {/* 特集：エル・ゴラッソ（優先表示） */}
       <a
-        href={amazonSearch("エルゴラッソ ワールドカップ 2026 特集")}
+        href={amazonUrl(ELGOLAZO_ASIN)}
         target="_blank"
         rel="noopener noreferrer sponsored"
         className="flex items-center gap-4 mb-6 p-4 rounded-2xl border border-yellow-400/30 bg-gradient-to-r from-yellow-400/15 to-transparent hover:from-yellow-400/25 transition-all"
       >
         <div className="flex-shrink-0 text-3xl">📕</div>
         <div className="min-w-0 flex-1">
-          <div className="text-[10px] font-bold text-yellow-300 tracking-widest mb-0.5">おすすめ · PR</div>
+          <div className="text-[10px] font-bold text-yellow-300 tracking-widest mb-0.5">ベストセラー1位 · PR</div>
           <div className="text-sm font-extrabold text-white leading-tight">
-            エル・ゴラッソ W杯2026 出場国完全ガイド
+            2026 北中米W杯 48カ国選手名鑑（エル・ゴラッソ特別編集）
           </div>
           <div className="text-xs text-white/50 mt-0.5">
-            出場48カ国を完全網羅。各国の戦力・注目選手・組み合わせをサッカー専門紙が徹底解説。どの国を応援する人にも
+            出場48カ国の候補選手1,542人を掲載。各国の戦力・注目選手がこれ一冊でまるわかり
           </div>
         </div>
         <div className="flex-shrink-0 text-xs font-bold text-black bg-yellow-400 rounded-full px-3 py-1.5">
