@@ -111,6 +111,18 @@ export default function SoccerPage() {
           <div className="text-white/30 text-lg">→</div>
         </a>
 
+        {/* 決勝トーナメント解説リンク */}
+        <a
+          href="/ja/soccer/knockout"
+          className="flex items-center justify-between w-full mb-6 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
+        >
+          <div>
+            <div className="text-sm font-bold text-white">🏆 決勝トーナメントの仕組み</div>
+            <div className="text-xs text-white/40 mt-0.5">48カ国・何チームが進出？ ラウンド32からの勝ち上がりを図解</div>
+          </div>
+          <div className="text-white/30 text-lg">→</div>
+        </a>
+
         {/* 全カ国グリッド */}
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xs font-semibold text-white/40 uppercase tracking-widest">
