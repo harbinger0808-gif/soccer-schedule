@@ -290,6 +290,28 @@ export default function ViewingGuide() {
         🛋️ 観戦のお供
       </h2>
 
+      {/* 特集：エル・ゴラッソ（優先表示） */}
+      <a
+        href={amazonSearch("エルゴラッソ ワールドカップ 2026 特集")}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        className="flex items-center gap-4 mb-6 p-4 rounded-2xl border border-yellow-400/30 bg-gradient-to-r from-yellow-400/15 to-transparent hover:from-yellow-400/25 transition-all"
+      >
+        <div className="flex-shrink-0 text-3xl">📕</div>
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-bold text-yellow-300 tracking-widest mb-0.5">おすすめ · PR</div>
+          <div className="text-sm font-extrabold text-white leading-tight">
+            エル・ゴラッソ W杯2026 特集号
+          </div>
+          <div className="text-xs text-white/50 mt-0.5">
+            サッカー専門紙が総力取材。出場国・注目選手・組み合わせの完全ガイド
+          </div>
+        </div>
+        <div className="flex-shrink-0 text-xs font-bold text-black bg-yellow-400 rounded-full px-3 py-1.5">
+          Amazon →
+        </div>
+      </a>
+
       <div className="space-y-6">
         {ITEMS.map((section) => (
           <div key={section.category}>
