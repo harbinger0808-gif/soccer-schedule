@@ -11,6 +11,7 @@ import ViewingGuide from "@/components/ViewingGuide";
 import AdBanner from "@/components/AdBanner";
 import NativeAdCard from "@/components/NativeAdCard";
 import IMobileAd from "@/components/IMobileAd";
+import StickyAdBanner from "@/components/StickyAdBanner";
 
 const JAPAN_ID = JAPAN_TEAM_ID;
 
@@ -202,7 +203,10 @@ export default function ScheduleClient() {
             )}
           </>
         )}
+        {/* アンカー広告で隠れないための余白 */}
+        <div className="h-28" />
       </div>
+      <StickyAdBanner />
     </main>
   );
 }
