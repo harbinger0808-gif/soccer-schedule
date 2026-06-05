@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import IMobileAd from "@/components/IMobileAd";
 import StickyAdBanner from "@/components/StickyAdBanner";
+import KnockoutBracket from "@/components/KnockoutBracket";
 
 const DAZN_URL =
   process.env.NEXT_PUBLIC_DAZN_AFFILIATE_URL ?? "https://www.dazn.com/ja-JP/welcome";
@@ -197,6 +198,17 @@ export default function KnockoutPage() {
             <p className="text-xs text-white/40 mt-3">
               決勝トーナメントは合計32試合。グループリーグ72試合と合わせて、大会全体で104試合になります。
             </p>
+          </section>
+
+          {/* 決勝トーナメント試合表（実データ） */}
+          <section>
+            <h2 className="text-white font-bold text-base mb-1">
+              決勝トーナメント 試合表・日程
+            </h2>
+            <p className="text-white/50 text-xs mb-4">
+              ラウンド32から決勝までの日程・会場（日本時間）。気になる試合はそのままGoogleカレンダーに追加できます。
+            </p>
+            <KnockoutBracket />
           </section>
 
           <section>
