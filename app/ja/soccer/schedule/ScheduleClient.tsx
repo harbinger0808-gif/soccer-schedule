@@ -192,6 +192,15 @@ export default function ScheduleClient() {
                     <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl px-4 py-2.5 mb-3 text-xs text-amber-300/80">
                       ⏳ 対戦チームはグループステージ終了後に確定します。カレンダー登録は今すぐ可能です。
                     </div>
+                    <a
+                      href="/ja/soccer/knockout"
+                      className="flex items-center justify-between px-4 py-2.5 mb-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                    >
+                      <span className="text-xs text-white/70">
+                        🏆 何チームが進出？ <span className="text-white/40">決勝トーナメントの仕組みを図解で解説</span>
+                      </span>
+                      <span className="text-white/30">→</span>
+                    </a>
                     <div className="space-y-3">
                       {knockout.map((match) => (
                         <MatchCard key={match.id} match={match} isTBD />

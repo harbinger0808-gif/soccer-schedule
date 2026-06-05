@@ -197,7 +197,8 @@ export default function SoccerPage() {
         <IMobileAd />
 
         {/* フッターリンク */}
-        <div className="flex gap-4 justify-center pt-6 pb-2 text-xs text-white/20">
+        <div className="flex gap-4 justify-center pt-6 pb-2 text-xs text-white/20 flex-wrap">
+          <a href="/ja/soccer/knockout" className="hover:text-white/40">決勝トーナメントの仕組み</a>
           <a href="/about" className="hover:text-white/40">このサイトについて</a>
           <a href="/privacy" className="hover:text-white/40">プライバシーポリシー</a>
           <a href="/terms" className="hover:text-white/40">利用規約</a>
