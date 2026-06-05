@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import IMobileAd from "@/components/IMobileAd";
 
 const DAZN_URL =
   process.env.NEXT_PUBLIC_DAZN_AFFILIATE_URL ?? "https://www.dazn.com/ja-JP/welcome";
 const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? "syunchan0529-22";
 const FIRE_TV_URL = `https://www.amazon.co.jp/dp/B09SWJXZ9Y?tag=${AMAZON_TAG}`;
 
-const TOTAL = 5;
+// i-mobile広告の読み込み猶予を確保するため少し長め
+const TOTAL = 7;
 
 interface Props {
   open: boolean;
@@ -131,6 +133,9 @@ export default function AdModal({ open, onComplete }: Props) {
           </div>
           <span className="text-orange-300 text-sm">Amazon →</span>
         </a>
+
+        {/* i-mobile 広告 */}
+        <IMobileAd />
 
         {/* 広告表示 */}
         <p className="text-center text-[10px] text-white/20">広告</p>

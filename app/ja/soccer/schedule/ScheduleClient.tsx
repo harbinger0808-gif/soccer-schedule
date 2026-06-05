@@ -153,8 +153,9 @@ export default function ScheduleClient() {
                       isNext={nextMatch?.id === match.id}
                       selectedTeamIds={teamIds}
                     />
+                    {/* 5件ごとに広告。i-mobileを優先的に出し、15件ごとにネイティブ広告 */}
                     {(index + 1) % 5 === 0 && index !== matches.length - 1 && (
-                      (index + 1) % 10 === 0 ? <IMobileAd /> : <NativeAdCard />
+                      (index + 1) % 15 === 0 ? <NativeAdCard /> : <IMobileAd />
                     )}
                   </Fragment>
                 ))}
