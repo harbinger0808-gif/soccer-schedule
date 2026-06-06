@@ -6,6 +6,7 @@ import { WC_TEAMS, JAPAN_TEAM_ID, Match } from "@/lib/football";
 import { TEAM_META } from "@/lib/teamData";
 import FeaturedMatches from "@/components/FeaturedMatches";
 import IMobileAd from "@/components/IMobileAd";
+import StickyAdBanner from "@/components/StickyAdBanner";
 
 const JAPAN_ID = JAPAN_TEAM_ID;
 
@@ -216,7 +217,11 @@ export default function SoccerPage() {
           <a href="/privacy" className="hover:text-white/40">プライバシーポリシー</a>
           <a href="/terms" className="hover:text-white/40">利用規約</a>
         </div>
+
+        {/* アンカー広告で隠れないための余白 */}
+        <div className="h-28" />
       </div>
+      <StickyAdBanner />
     </main>
   );
 }
