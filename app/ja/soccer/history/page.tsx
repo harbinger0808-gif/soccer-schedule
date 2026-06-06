@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import IMobileAd from "@/components/IMobileAd";
 import StickyAdBanner from "@/components/StickyAdBanner";
+import ElGolazoFeature from "@/components/ElGolazoFeature";
 
 const DAZN_URL =
   process.env.NEXT_PUBLIC_DAZN_AFFILIATE_URL ?? "https://www.dazn.com/ja-JP/welcome";
@@ -154,6 +155,8 @@ export default function HistoryPage() {
         <p className="text-white/50 text-sm mb-8">
           1930年の第1回から2022年カタール大会まで、全22大会の優勝国・決勝スコア・開催国を一覧で。優勝回数ランキングと日本代表の歴代成績もまとめました。
         </p>
+
+        <ElGolazoFeature className="mb-10" />
 
         <div className="space-y-10 text-white/70 text-sm leading-relaxed">
           {/* 優勝回数ランキング */}

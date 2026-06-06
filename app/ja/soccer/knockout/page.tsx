@@ -3,6 +3,7 @@ import Link from "next/link";
 import IMobileAd from "@/components/IMobileAd";
 import StickyAdBanner from "@/components/StickyAdBanner";
 import KnockoutBracket from "@/components/KnockoutBracket";
+import ElGolazoFeature from "@/components/ElGolazoFeature";
 
 const DAZN_URL =
   process.env.NEXT_PUBLIC_DAZN_AFFILIATE_URL ?? "https://www.dazn.com/ja-JP/welcome";
@@ -116,6 +117,8 @@ export default function KnockoutPage() {
             </a>
           </div>
         </div>
+
+        <ElGolazoFeature className="mb-10" />
 
         <div className="space-y-10 text-white/70 text-sm leading-relaxed">
           <section>
