@@ -1,12 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import IMobileAd from "@/components/IMobileAd";
 
 // 画面下に固定表示するアンカー広告（視認性が高くRPMが上がりやすい）
-// 閉じるボタン付き。AdSense審査通過後は中身をAdSenseアンカーに差し替え可能。
+// i-mobileが広告を返さない（在庫切れ）場合は、自動でアフィリ広告にフォールバック。
+const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? "syunchan0529-22";
+const ELGOLAZO_URL = `https://www.amazon.co.jp/dp/B0GY68MZ85?tag=${AMAZON_TAG}`;
+
 export default function StickyAdBanner() {
   const [closed, setClosed] = useState(false);
+  const [fallback, setFallback] = useState(false);
+  const adRef = useRef<HTMLDivElement>(null);
+
+  // 一定時間内に i-mobile がiframeを描画しなければ、フォールバック表示
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const filled = adRef.current?.querySelector("iframe, ins img");
+      if (!filled) setFallback(true);
+    }, 2500);
+    return () => clearTimeout(t);
+  }, []);
 
   if (closed) return null;
 
@@ -22,7 +36,34 @@ export default function StickyAdBanner() {
           ✕
         </button>
         <span className="absolute top-0.5 left-2 text-[9px] text-white/25">広告</span>
-        <IMobileAd />
+
+        {/* i-mobile（埋まればこちらが表示） */}
+        <div ref={adRef} style={{ display: fallback ? "none" : "block" }}>
+          <IMobileAd />
+        </div>
+
+        {/* フォールバック：エルゴラッソ アフィリ */}
+        {fallback && (
+          <a
+            href={ELGOLAZO_URL}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="flex items-center gap-3 py-1.5"
+          >
+            <span className="flex-shrink-0 text-xl">📕</span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-bold text-white leading-tight truncate">
+                2026 W杯 48カ国選手名鑑（エル・ゴラッソ）
+              </span>
+              <span className="block text-[10px] text-white/50 leading-tight">
+                ベストセラー1位 · 候補1,542人掲載
+              </span>
+            </span>
+            <span className="flex-shrink-0 text-[11px] font-bold text-black bg-yellow-400 rounded-full px-2.5 py-1">
+              Amazon →
+            </span>
+          </a>
+        )}
       </div>
     </div>
   );
